@@ -2,7 +2,7 @@ cluster: "~/.config/snakemake/{{cookiecutter.profile_name}}/slurm-submit.py {dep
 jobscript: "slurm-jobscript.sh"
 jobs: 500
 verbose: {{cookiecutter.verbose}}
-use_singularity: {{cookiecutter.use_singularity}}
-use_envmodules: {{cookiecutter.use_envmodules}}
+use-singularity: {{cookiecutter.use-singularity}}
+use-envmodules: {{cookiecutter.use-envmodules}}
 immediate-submit: {{cookiecutter.immediate_submit}}
 notemp: true

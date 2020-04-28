@@ -2,6 +2,7 @@
 
 This profile configures Snakemake to run on Compute Canada with SLURM (e.g. graham).
 
+Note: the default options already use the `--use-singularity` and `--use-envmodules` flags, and the `ctb-akhanf` compute allocation account. 
 
 ## Setup
 

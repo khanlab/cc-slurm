@@ -1,4 +1,4 @@
-cluster: "~/.config/snakemake/cc-slurm/slurm-submit.py --depend {dependencies}"
+cluster: "~/.config/snakemake/cc-slurm/slurm-submit.py {dependencies}"
 cluster-status: "~/.config/snakemake/cc-slurm/slurm-status.py"
 jobscript: "slurm-jobscript.sh"
 jobs: 500

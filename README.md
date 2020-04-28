@@ -6,13 +6,11 @@ This profile configures Snakemake to run on Compute Canada with SLURM (e.g. grah
 
 ### Deploy profile
 
-To deploy this profile, run
+To deploy this profile, run:
 
-    mkdir -p ~/.config/snakemake
-    cd ~/.config/snakemake
-    cookiecutter https://github.com/akhanf/cc-slurm.git
+    cookiecutter gh:akhanf/cc-slurm -o ~/.config/snakemake -f
 
-Then, you can run Snakemake with
+Then, you can run Snakemake with:
 
     snakemake --profile cc-slurm ...
 

@@ -1,6 +1,5 @@
 {
     "profile_name": "cc-slurm",
-    "immediate_submit": true,
     "account": "ctb-akhanf",
     "gpu_type": "t4",
     "default_time": 60,
@@ -9,6 +8,10 @@
     "max_time": 4320,
     "max_mem_mb": 128000,
     "max_gpus": 4,
-    "max_threads": 32
+    "max_threads": 32,
+    "immediate_submit": true,
+    "use-singularity": true,
+    "use-envmodules": true,
+    "verbose": false
 }
 

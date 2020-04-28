@@ -1,8 +1,8 @@
-cluster: "~/.config/snakemake/cc-slurm/slurm-submit.py {dependencies}"
+cluster: "{{cookiecutter._root}/slurm-submit.py {dependencies}"
 jobscript: "slurm-jobscript.sh"
 jobs: 500
+verbose: {{cookiecutter.verbose}}
+use-singularity: {{cookiecutter.use-singularity}}
+use-envmodules: {{cookiecutter.use-envmodules}}
 immediate-submit: {{cookiecutter.immediate_submit}}
-verbose: true
 notemp: true
-use-singularity: true
-use-envmodules: true

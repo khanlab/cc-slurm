@@ -1,5 +1,5 @@
-cluster: "$((INSTALDIR))/slurm-submit.py --depend \"{dependencies}\""
-cluster-status: "$((INSTALDIR))/slurm-status.py"
+cluster: "slurm-submit.py --depend \"{dependencies}\""
+cluster-status: "slurm-status.py"
 jobscript: "slurm-jobscript.sh"
 jobs: 500
 immediate-submit: {{cookiecutter.immediate_submit}}

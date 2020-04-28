@@ -1,6 +1,6 @@
 {
     "profile_name": "cc-slurm",
-    "immediate_submit": false,
+    "immediate_submit": true,
     "account": "ctb-akhanf",
     "default_time": 60,
     "default_mem_mb": 4000,

@@ -1,4 +1,4 @@
-cluster: "{{cookiecutter._root}/slurm-submit.py {dependencies}"
+cluster: "{{cookiecutter._root}}/slurm-submit.py {dependencies}"
 jobscript: "slurm-jobscript.sh"
 jobs: 500
 verbose: {{cookiecutter.verbose}}

@@ -1,0 +1,9 @@
+{
+    "profile_name": "cc-slurm",
+    "immediate_submit": false,
+    "account": "ctb-akhanf",
+    "default_time": 60,
+    "default_mem_mb": 4000,
+    "default_gpu_type": "t4"
+}
+

@@ -1,0 +1,9 @@
+cluster: "slurm-submit.py --depend \"{dependencies}\""
+cluster-status: "slurm-status.py"
+jobscript: "slurm-jobscript.sh"
+jobs: 500
+immediate-submit: {{cookiecutter.immediate_submit}}
+verbose: true
+notemp: true
+use-singularity: true
+use-envmodules: true

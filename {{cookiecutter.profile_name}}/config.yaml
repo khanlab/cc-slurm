@@ -1,4 +1,4 @@
-cluster: "{{cookiecutter.repo_dir}}/slurm-submit.py {dependencies}"
+cluster: "~/.config/snakemake/{{cookiecutter.profile_name}}/slurm-submit.py {dependencies}"
 jobscript: "slurm-jobscript.sh"
 jobs: 500
 verbose: {{cookiecutter.verbose}}

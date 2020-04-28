@@ -53,10 +53,32 @@ elif job_properties["type"]=='group':
     #  2) check when there may be too many jobs in the group
     # if 2), could always try to resubmit with larger job?  
     
-    time = 60*24
-    mem_mb = 128000
-    threads = 32
-    gpus = 0
+#    time = 60*24
+#    mem_mb = 128000
+#    threads = 32
+#    gpus = 0
+
+    #get values and set defaults
+    if 'time' in job_properties["resources"].keys():
+        time = job_properties["resources"]["time"]
+    else:  
+        time = {{cookiecutter.default_time}}
+
+    if 'mem_mb' in job_properties["resources"].keys():
+        mem_mb = job_properties["resources"]["mem_mb"]
+    else:  
+        mem_mb = {{cookiecutter.default_mem_mb}}
+
+    if 'gpus' in job_properties["resources"].keys():
+        gpus = job_properties["resources"]["gpus"]
+    else:  
+        gpus = 0
+
+    #for single job, threads already set to 1 by default
+    threads = job_properties["threads"]
+
+
+
 
 else:
     raise NotImplementedError(f"Don't know what to do with job_properties['type']=={job_properties['type']}")

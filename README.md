@@ -13,11 +13,13 @@ Install cookiecutter on your system (make sure you have python3 loaded):
 
 ### Deploy profile
 
-To deploy this profile, run the following on the login node (e.g. graham)
+To deploy this profile, run the following on the login node (e.g. graham):
+
+    cookiecutter gh:khanlab/cc-slurm -o ~/.config/snakemake -f --no-input
+
+If you are not using the `ctb-akhanf` account, or want to customize the options, use this instead:
 
     cookiecutter gh:khanlab/cc-slurm -o ~/.config/snakemake -f
-
-NOTE: If you are using graham with the `ctb-akhanf` account then all the default options can be used. 
 
 
 

@@ -2,7 +2,12 @@
 
 This profile configures Snakemake to run on Compute Canada with SLURM (e.g. graham).
 
+
 ## Setup
+
+Install cookiecutter on your system (make sure you have python3 loaded):
+
+    pip install cookiecutter --user
 
 ### Deploy profile
 

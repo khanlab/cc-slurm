@@ -1,71 +1,48 @@
 #!/usr/bin/env python3
-import re
-import subprocess as sp
-import shlex
+"""
+Submit this clustering script for sbatch to snakemake with:
+
+    snakemake -j 99 --cluster slurm_scheduler.py --cluster-status slurm_status.py
+"""
+
+import os
 import sys
-import time
-import logging
+import warnings
+import subprocess
 
-# this is from https://raw.githubusercontent.com/Snakemake-Profiles/slurm/master/%7B%7Bcookiecutter.profile_name%7D%7D/slurm-status.py
-
-logger = logging.getLogger("__name__")
-
-STATUS_ATTEMPTS = 20
 
 jobid = sys.argv[1]
 
-for i in range(STATUS_ATTEMPTS):
-    try:
-        sacct_res = sp.check_output(shlex.split("sacct -P -b -j {} -n".format(jobid)))
-        res = {
-            x.split("|")[0]: x.split("|")[1]
-            for x in sacct_res.decode().strip().split("\n")
-        }
-        break
-    except sp.CalledProcessError as e:
-        logger.error("sacct process error")
-        logger.error(e)
-    except IndexError as e:
-        pass
-    # Try getting job with scontrol instead in case sacct is misconfigured
-    try:
-        sctrl_res = sp.check_output(
-            shlex.split("scontrol -o show job {}".format(jobid))
-        )
-        m = re.search("JobState=(\w+)", sctrl_res.decode())
-        res = {jobid: m.group(1)}
-        break
-    except sp.CalledProcessError as e:
-        logger.error("scontrol process error")
-        logger.error(e)
-        if i >= STATUS_ATTEMPTS - 1:
-            print("failed")
-            exit(0)
-        else:
-            time.sleep(1)
 
-status = res[jobid]
+out= subprocess.run(['scontrol','show','jobid',jobid],stdout=subprocess.PIPE).stdout.decode('utf-8')
 
-if status == "BOOT_FAIL":
-    print("failed")
-elif status == "OUT_OF_MEMORY":
-    print("failed")
-elif status.startswith("CANCELLED"):
-    print("failed")
-elif status == "COMPLETED":
-    print("success")
-elif status == "DEADLINE":
-    print("failed")
-elif status == "FAILED":
-    print("failed")
-elif status == "NODE_FAIL":
-    print("failed")
-elif status == "PREEMPTED":
-    print("failed")
-elif status == "TIMEOUT":
-    print("failed")
-# Unclear whether SUSPENDED should be treated as running or failed
-elif status == "SUSPENDED":
-    print("failed")
-else:
-    print("running")
+def parse_key_value(stream):
+    params={}
+    for key_value_pair in stream.split():
+        name, var = key_value_pair.partition("=")[::2]
+        params[name.strip()] = var
+    return params
+
+
+state=parse_key_value(out)['JobState']
+
+
+map_state={"PENDING":'running',
+           "RUNNING":'running', 
+           "SUSPENDED":'running', 
+           "CANCELLED":'failed', 
+           "COMPLETING":'running', 
+           "COMPLETED":'success', 
+           "CONFIGURING":'running', 
+           "FAILED":'failed',
+           "TIMEOUT":'failed',
+           "PREEMPTED":'failed',
+           "NODE_FAIL":'failed',
+           "REVOKED":'failed',
+           "SPECIAL_EXIT":'failed',
+           "":'success',
+	   "OUT_OF_MEMORY":'failed'}
+
+print(map_state.get(state,'failed'))
+
+

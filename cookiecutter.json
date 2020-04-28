@@ -10,8 +10,8 @@
     "max_gpus": 4,
     "max_threads": 32,
     "immediate_submit": true,
-    "use-singularity": true,
-    "use-envmodules": true,
+    "use_singularity": true,
+    "use_envmodules": true,
     "verbose": false
 }
 

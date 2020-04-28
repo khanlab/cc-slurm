@@ -1,5 +1,4 @@
 cluster: "~/.config/snakemake/cc-slurm/slurm-submit.py {dependencies}"
-cluster-status: "~/.config/snakemake/cc-slurm/slurm-status.py"
 jobscript: "slurm-jobscript.sh"
 jobs: 500
 immediate-submit: {{cookiecutter.immediate_submit}}

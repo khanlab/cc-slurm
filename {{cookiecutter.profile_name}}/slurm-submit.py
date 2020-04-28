@@ -45,44 +45,31 @@ if job_properties["type"]=='single':
 
 elif job_properties["type"]=='group':
 
-    #for a grouped rule, we request an entire node in order to maximize throughput:
+    #for a grouped rule, threads is set by snakemake according to parallelism in the group,
+    # all we resources are summed.. we use these, unless they are greater than the largest node
     job_name = job_properties['groupid']
-
-    # Maybe look into later: add some checks to 
-    #  1) set a reasonable walltime (less than 24hrs) based on 1hr 1core jobs
-    #  2) check when there may be too many jobs in the group
-    # if 2), could always try to resubmit with larger job?  
-    
-#    time = 60*24
-#    mem_mb = 128000
-#    threads = 32
-#    gpus = 0
 
     #get values and set defaults
     if 'time' in job_properties["resources"].keys():
-        time = job_properties["resources"]["time"]
+        time = min(job_properties["resources"]["time"],{{cookiecutter.max_time}})
     else:  
         time = {{cookiecutter.default_time}}
 
     if 'mem_mb' in job_properties["resources"].keys():
-        mem_mb = job_properties["resources"]["mem_mb"]
+        mem_mb = min(job_properties["resources"]["mem_mb"],{{cookiecutter.max_mem_mb}})
     else:  
         mem_mb = {{cookiecutter.default_mem_mb}}
 
     if 'gpus' in job_properties["resources"].keys():
-        gpus = job_properties["resources"]["gpus"]
+        gpus = min(job_properties["resources"]["gpus"],{{cookiecutter.max_gpus}})
     else:  
         gpus = 0
 
-    #for single job, threads already set to 1 by default
-    threads = job_properties["threads"]
-
-
+    threads = min(job_properties["threads"],{{cookiecutter.max_threads}})
 
 
 else:
     raise NotImplementedError(f"Don't know what to do with job_properties['type']=={job_properties['type']}")
-
 
 
 log = os.path.realpath(os.path.join('logs','slurm',f'slurm_%j_{job_name}.out'))
@@ -98,7 +85,7 @@ if not os.path.exists(os.path.dirname(log)):
 cmdline = ["sbatch"]
 
 if gpus > 0:
-    gpu_arg = f'--gres=gpu:{{cookiecutter.default_gpu_type}}:{gpus}'
+    gpu_arg = f'--gres=gpu:{{cookiecutter.gpu_type}}:{gpus}'
 else:
     gpu_arg = ''
 

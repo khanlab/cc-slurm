@@ -2,8 +2,13 @@
     "profile_name": "cc-slurm",
     "immediate_submit": true,
     "account": "ctb-akhanf",
+    "gpu_type": "t4",
     "default_time": 60,
     "default_mem_mb": 4000,
-    "default_gpu_type": "t4"
+    "default_gpus": 0,
+    "max_time": 4320,
+    "max_mem_mb": 128000,
+    "max_gpus": 4,
+    "max_threads": 32
 }
 

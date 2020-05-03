@@ -1,5 +1,5 @@
 cluster: "~/.config/snakemake/{{cookiecutter.profile_name}}/slurm-submit.py {dependencies}"
-cluster-status: "~/.config/snakemake/{{cookiecutter.profile_name}}/slurm-status.py"
+#cluster-status: "~/.config/snakemake/{{cookiecutter.profile_name}}/slurm-status.py"  #not fully tested yet.. better to rely on filesystem checks..  
 jobscript: "slurm-jobscript.sh"
 jobs: 500
 verbose: {{cookiecutter.verbose}}
@@ -8,7 +8,7 @@ use-envmodules: {{cookiecutter.use_envmodules}}
 immediate-submit: {{cookiecutter.immediate_submit}}
 notemp: {{cookiecutter.immediate_submit}} #notemp set to the value of immediate_submit (since both have to be true together)
 max-jobs-per-second: 2
-max-status-checks-per-second: 0.2
-restart-times: 1
+#max-status-checks-per-second: 0.2
+#restart-times: 1
 default-resources: "mem_mb={{cookiecutter.default_mem_mb}}" #this is for ensuring grouped-jobs have enough memory (ie. sum of memory request)
 local-cores: 1

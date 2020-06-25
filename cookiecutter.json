@@ -6,12 +6,13 @@
     "default_mem_mb": 4000,
     "default_gpus": 0,
     "max_time": 4320,
-    "max_mem_mb": 128000,
-    "max_gpus": 4,
-    "max_threads": 32,
+    "max_mem_mb": 32000,
+    "max_gpus": 1,
+    "max_threads": 8,
     "immediate_submit": true,
     "use_singularity": true,
     "use_envmodules": true,
-    "verbose": false
+    "verbose": false,
+    "singularity_prefix": "/project/6050199/akhanf/singularity/snakemake_containers/"
 }
 

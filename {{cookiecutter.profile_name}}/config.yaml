@@ -13,3 +13,8 @@ max-jobs-per-second: 2
 #restart-times: 1
 default-resources: "mem_mb={{cookiecutter.default_mem_mb}}" #this is for ensuring grouped-jobs have enough memory (ie. sum of memory request)
 local-cores: 1
+singularity-prefix: '/project/ctb-akhanf/akhanf/singularity/snakemake_containers'
+notebook-listen: '$(hostname -f):8888'
+rerun-incomplete: True
+keep-going: True
+show-failed-logs: True

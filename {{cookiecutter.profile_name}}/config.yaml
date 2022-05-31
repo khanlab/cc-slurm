@@ -5,7 +5,7 @@ jobs: 500
 verbose: {{cookiecutter.verbose}}
 use-singularity: {{cookiecutter.use_singularity}}
 use-envmodules: {{cookiecutter.use_envmodules}}
-singularity-args: '\-e'
+singularity-args: ' -e '
 immediate-submit: {{cookiecutter.immediate_submit}}
 notemp: {{cookiecutter.immediate_submit}} #notemp set to the value of immediate_submit (since both have to be true together)
 max-jobs-per-second: 2

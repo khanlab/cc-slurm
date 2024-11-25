@@ -30,6 +30,8 @@ else:
 #get values and set defaults
 if 'time' in job_properties["resources"].keys():
     time = min(job_properties["resources"]["time"],{{cookiecutter.max_time}})
+elif 'runtime' in job_properties["resources"].keys():
+    time = min(job_properties["resources"]["runtime"],{{cookiecutter.max_time}})
 else:  
     time = {{cookiecutter.default_time}}
 
